@@ -1,0 +1,20 @@
+---
+version: "3.8"
+name: "crynux_node"
+
+services:
+  crynux_node:
+    image: ghcr.io/crynux-ai/crynux-node:latest
+    container_name: crynux_node
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:7412:7412"
+    volumes:
+      - "./data:/app/data"
+      - "./config:/app/config"
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              capabilities: [gpu]

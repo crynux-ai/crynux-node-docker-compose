@@ -1,2 +1,4 @@
-# crynux-node-docker-compose
-The docker compose file and directory structure to start the docker version of Crynux Node locally
+# Start the Crynux Node using Docker compose locally
+
+Please follow the guide at [Start a Node - Docker](https://docs.crynux.ai/node-hosting/start-a-node-docker) on how to use this repository.
+
