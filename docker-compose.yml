@@ -10,7 +10,7 @@ services:
     ports:
       - "127.0.0.1:7412:7412"
     volumes:
-      - "./data:/app/data"
+      - "./tmp:/app/tmp"
       - "./config:/app/config"
     deploy:
       resources:
