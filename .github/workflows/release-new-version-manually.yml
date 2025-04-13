@@ -1,4 +1,4 @@
-name: Update docker-compose.yml to use the new version of the Crynux Node
+name: Manually update docker-compose.yml to use the new version of the Crynux Node
 
 on:
   workflow_dispatch:
@@ -7,6 +7,9 @@ on:
         description: 'build manually trigger'
         required: true
         default: 'triggered by developer'
+
+permissions:  
+  contents: write
 
 jobs:
   update-docker-compose:
@@ -30,7 +33,7 @@ jobs:
       
       - name: Generate docker-compose.yml
         run: |
-          ./generate.sh "${{ github.event.client_payload.release-version }}" "${{ matrix.blockchain }}"
+          bash generate.sh "${{ github.event.client_payload.release-version }}" "${{ matrix.blockchain }}"
       
       - name: Configure Git
         run: |
