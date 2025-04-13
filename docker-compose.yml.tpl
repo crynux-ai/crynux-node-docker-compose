@@ -10,7 +10,8 @@ services:
     ports:
       - "127.0.0.1:7412:7412"
     volumes:
-      - "./tmp:/app/tmp"
+      - huggingface_cache_vol:/app/tmp/huggingface
+      - external_cache_vol:/app/tmp/external
       - "./config:/app/config"
     deploy:
       resources:
@@ -19,3 +20,7 @@ services:
             - driver: nvidia
               count: all
               capabilities: [gpu]
+
+volumes:
+  huggingface_cache_vol:
+  external_cache_vol:
