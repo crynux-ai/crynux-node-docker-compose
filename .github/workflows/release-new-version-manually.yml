@@ -31,12 +31,12 @@ jobs:
           
       - name: Print the version data
         run: |
-          echo "Release version: ${{ github.event.client_payload.release-version }}"
+          echo "Release version: ${{ env.RELEASE_VERSION }}"
           echo "Blockchain: ${{ matrix.blockchain }}"
       
       - name: Generate docker-compose.yml
         run: |
-          bash generate.sh "${{ github.event.client_payload.release-version }}" "${{ matrix.blockchain }}"
+          bash generate.sh "${{ env.RELEASE_VERSION }}" "${{ matrix.blockchain }}"
       
       - name: Configure Git
         run: |
@@ -46,6 +46,6 @@ jobs:
       - name: Commit and push changes
         run: |
           git add docker-compose.yml
-          git commit -m "Update docker-compose.yml to version ${{ github.event.client_payload.release-version }} for ${{ matrix.blockchain }}"
+          git commit -m "Update docker-compose.yml to version ${{ env.RELEASE_VERSION }} for ${{ matrix.blockchain }}"
           git push origin ${{ matrix.blockchain }}
     
