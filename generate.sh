@@ -23,16 +23,6 @@ echo "Generating docker-compose.yml with:"
 echo "  RELEASE_VERSION: $RELEASE_VERSION"
 echo "  BLOCKCHAIN: $BLOCKCHAIN"
 
-# Check if docker-compose.yml already exists
-if [[ -f "docker-compose.yml" ]]; then
-  echo "Warning: docker-compose.yml already exists."
-  read -p "Do you want to overwrite it? (y/n): " confirm
-  if [[ "$confirm" != "y" && "$confirm" != "Y" ]]; then
-    echo "Operation cancelled."
-    exit 0
-  fi
-fi
-
 # Create docker-compose.yml from template
 sed "s/RELEASE_VERSION/$RELEASE_VERSION/g; s/BLOCKCHAIN/$BLOCKCHAIN/g" docker-compose.yml.tpl > docker-compose.yml
 

@@ -1,0 +1,51 @@
+name: Manually update docker-compose.yml to use the new version of the Crynux Node
+
+on:
+  workflow_dispatch:
+    inputs:
+      name:
+        description: 'build manually trigger'
+        required: true
+        default: 'triggered by developer'
+
+env:
+  RELEASE_VERSION: 2.5.0
+
+permissions:  
+  contents: write
+
+jobs:
+  update-docker-compose:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    strategy:
+      matrix:
+        blockchain: [dymension, near]
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ matrix.blockchain }}
+          
+      - name: Print the version data
+        run: |
+          echo "Release version: ${{ env.RELEASE_VERSION }}"
+          echo "Blockchain: ${{ matrix.blockchain }}"
+      
+      - name: Generate docker-compose.yml
+        run: |
+          bash generate.sh "${{ env.RELEASE_VERSION }}" "${{ matrix.blockchain }}"
+      
+      - name: Configure Git
+        run: |
+          git config user.name "GitHub Actions Bot"
+          git config user.email "actions@github.com"
+      
+      - name: Commit and push changes
+        run: |
+          git add docker-compose.yml
+          git commit -m "Update docker-compose.yml to version ${{ env.RELEASE_VERSION }} for ${{ matrix.blockchain }}"
+          git push origin ${{ matrix.blockchain }}
+    
