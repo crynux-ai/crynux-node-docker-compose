@@ -8,6 +8,9 @@ on:
         required: true
         default: 'triggered by developer'
 
+env:
+  RELEASE_VERSION: 2.5.0
+
 permissions:  
   contents: write
 
