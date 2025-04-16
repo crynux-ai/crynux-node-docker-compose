@@ -26,6 +26,7 @@ jobs:
       
       - name: Generate docker-compose.yml
         run: |
+          chmod +x ./generate.sh
           ./generate.sh "${{ github.event.client_payload.release-version }}" "${{ matrix.blockchain }}"
       
       - name: Configure Git
