@@ -3,7 +3,7 @@ name: "crynux_node"
 
 services:
   crynux_node:
-    image: ghcr.io/crynux-network/crynux-node:3.5.0-near
+    image: ghcr.io/crynux-network/crynux-node:3.5.1-near
     container_name: crynux_node
     restart: unless-stopped
     ports:
